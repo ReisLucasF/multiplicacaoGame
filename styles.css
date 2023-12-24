@@ -40,6 +40,10 @@ body {
     text-align: center;
     color: #ffffff;
   }
+
+    input::placeholder {
+    color: #fff;
+  }
   
   #gameArea {
     margin-top: 20px;
