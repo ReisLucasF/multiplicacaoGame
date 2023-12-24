@@ -56,4 +56,19 @@ body {
   .hidden {
     display: none;
   }
+
+  #hearts {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .heart {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #e44d4d;
+    margin-right: 5px;
+    border-radius: 50%;
+  }
   
