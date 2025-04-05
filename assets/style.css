@@ -1,0 +1,262 @@
+body {
+  font-family: "Press Start 2P", cursive;
+  background-color: #111827;
+  background-image: linear-gradient(
+      0deg,
+      transparent 24%,
+      rgba(99, 102, 241, 0.05) 25%,
+      rgba(99, 102, 241, 0.05) 26%,
+      transparent 27%,
+      transparent 74%,
+      rgba(99, 102, 241, 0.05) 75%,
+      rgba(99, 102, 241, 0.05) 76%,
+      transparent 77%,
+      transparent
+    ),
+    linear-gradient(
+      90deg,
+      transparent 24%,
+      rgba(99, 102, 241, 0.05) 25%,
+      rgba(99, 102, 241, 0.05) 26%,
+      transparent 27%,
+      transparent 74%,
+      rgba(99, 102, 241, 0.05) 75%,
+      rgba(99, 102, 241, 0.05) 76%,
+      transparent 77%,
+      transparent
+    );
+  background-size: 40px 40px;
+  image-rendering: pixelated;
+}
+
+.pixel-border {
+  position: relative;
+  box-shadow: -4px 0 0 0 #000, 4px 0 0 0 #000, 0 -4px 0 0 #000, 0 4px 0 0 #000;
+}
+
+.pixel-border::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: transparent;
+  z-index: -1;
+}
+
+.pixel-button {
+  position: relative;
+  image-rendering: pixelated;
+  transition: all 0.1s ease;
+  transform-style: preserve-3d;
+  text-shadow: 2px 2px 0px #000;
+  box-shadow: 0px 6px 0px 0px rgba(0, 0, 0, 0.8),
+    inset -2px -2px 0px 0px rgba(0, 0, 0, 0.3),
+    inset 2px 2px 0px 0px rgba(255, 255, 255, 0.5);
+}
+
+.pixel-button:active {
+  transform: translateY(4px);
+  box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.8),
+    inset -2px -2px 0px 0px rgba(0, 0, 0, 0.3),
+    inset 2px 2px 0px 0px rgba(255, 255, 255, 0.5);
+}
+
+.pixel-heart {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 0 3px;
+  background-color: #ff2a6d;
+  position: relative;
+  transform: rotate(45deg);
+  image-rendering: pixelated;
+}
+
+.pixel-heart::before,
+.pixel-heart::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-color: #ff2a6d;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.pixel-heart::before {
+  top: -10px;
+  left: 0;
+}
+
+.pixel-heart::after {
+  top: 0;
+  left: -10px;
+}
+
+.pixel-heart.empty {
+  background-color: #2d3748;
+}
+
+.pixel-heart.empty::before,
+.pixel-heart.empty::after {
+  background-color: #2d3748;
+}
+
+/* Animação de piscada */
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  49% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+
+/* Input estilizado */
+input[type="number"] {
+  caret-color: #05d9e8;
+  color: #05d9e8;
+  background-color: #1a202c;
+  font-size: 1.5rem;
+  text-align: center;
+  width: 100%;
+  max-width: 300px;
+  height: 60px;
+  display: block;
+  border: 4px solid #ff2a6d;
+  box-shadow: inset 0 0 8px rgba(255, 42, 109, 0.5);
+  outline: none;
+}
+
+input[type="number"]:focus {
+  box-shadow: inset 0 0 12px rgba(5, 217, 232, 0.7);
+}
+
+/* Esconder setas */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Efeito CRT */
+.crt::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+.game-container {
+  position: relative;
+}
+
+/* HUD */
+.hud-container {
+  border: 4px solid #05d9e8;
+}
+
+.instructions-container {
+  border: 4px solid #d65fd6;
+  box-shadow: 0 0 15px rgba(214, 95, 214, 0.4);
+}
+
+/* pulsação */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 42, 109, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 42, 109, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 42, 109, 0);
+  }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+* {
+  box-sizing: border-box;
+  color: #ffffff;
+}
+
+/* efeito glitch*/
+@keyframes glitch {
+  0% {
+    text-shadow: 0.05em 0 0 #ff2a6d, -0.05em -0.025em 0 #05d9e8,
+      -0.025em 0.05em 0 #d65fd6;
+  }
+  14% {
+    text-shadow: 0.05em 0 0 #ff2a6d, -0.05em -0.025em 0 #05d9e8,
+      -0.025em 0.05em 0 #d65fd6;
+  }
+  15% {
+    text-shadow: -0.05em -0.025em 0 #ff2a6d, 0.025em 0.025em 0 #05d9e8,
+      -0.05em -0.05em 0 #d65fd6;
+  }
+  49% {
+    text-shadow: -0.05em -0.025em 0 #ff2a6d, 0.025em 0.025em 0 #05d9e8,
+      -0.05em -0.05em 0 #d65fd6;
+  }
+  50% {
+    text-shadow: 0.025em 0.05em 0 #ff2a6d, 0.05em 0 0 #05d9e8,
+      0 -0.05em 0 #d65fd6;
+  }
+  99% {
+    text-shadow: 0.025em 0.05em 0 #ff2a6d, 0.05em 0 0 #05d9e8,
+      0 -0.05em 0 #d65fd6;
+  }
+  100% {
+    text-shadow: -0.025em 0 0 #ff2a6d, -0.025em -0.025em 0 #05d9e8,
+      -0.025em -0.05em 0 #d65fd6;
+  }
+}
+
+.glitch {
+  animation: glitch 1.5s infinite;
+}
+
+/* game over */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-5px);
+  }
+  40%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+.shake {
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}

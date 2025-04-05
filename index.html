@@ -1,38 +1,325 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Jogo da Multiplicação</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet"> 
-</head>  
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Math Adventures - Seleção de Games</title>
+    <link
+      rel="shortcut icon"
+      href="./assets/logo.svg"
+      type="image/x-icon"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <body>
-  <div id="hearts">
-    <p id="score">PONTOS: 0</p>
-    <p>CHANCES:</p>
-    <span class="heart"></span>
-    <span class="heart"></span>
-    <span class="heart"></span>
-    <span class="heart"></span>
-    <span class="heart"></span>
-  </div>
-  <div class="container">
-    <h1>Jogo da Multiplicação</h1>
-    <button id="startButton">Iniciar</button>
-    <div id="gameArea" class="hidden">
-      <p id="question">Calcule: <span id="num1"></span> * <span id="num2"></span></p>
-      <input type="number" id="answerInput" placeholder="Sua resposta">
-      <button id="submitAnswer">Enviar</button>
-      <p id="resultMessage"></p>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./assets/style.css" />
+  </head>
+
+  <body
+    class="min-h-screen flex flex-col items-center justify-center text-center text-white crt"
+  >
+    <div class="container mx-auto max-w-4xl p-4">
+      <div class="title-container py-6 px-4 mb-10">
+        <h1 class="text-4xl text-pink-400 mb-4">MATH ADVENTURES</h1>
+        <p class="text-cyan-400 text-sm">SELECIONE UM GAME PARA JOGAR</p>
+        <p class="text-cyan-400 blink">USE AS SETAS PARA NAVEGAR</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
+        <!-- Super Multiplicação -->
+        <div
+          class="game-item relative bg-indigo-900/40 p-4 rounded-lg cursor-pointer active"
+          onclick="selectGame('multiplication')"
+        >
+          <span class="selector">►</span>
+          <div class="bg-black/30 rounded-lg overflow-hidden mb-4">
+            <img
+              src="./imgs/supermult.png"
+              alt="Super Multiplicação"
+              class="w-full h-40 object-cover"
+            />
+          </div>
+          <h3 class="text-yellow-300 mb-2">SUPER MULTIPLICAÇÃO</h3>
+          <p class="text-gray-300 text-xs mb-4">
+            Multiplique para sobreviver e vença os desafios matemáticos!
+          </p>
+          <div class="mt-auto">
+            <button
+              class="w-full bg-green-600 hover:bg-green-500 py-2 rounded pixel-button text-sm"
+              onclick="window.location.href='./multiplicacao.html'"
+            >
+              JOGAR AGORA
+            </button>
+          </div>
+        </div>
+
+        <!-- Divisão Radical (Em desenvolvimento) -->
+        <div
+          class="game-item relative bg-indigo-900/40 p-4 rounded-lg cursor-pointer locked"
+          onclick="showLockedGameModal('division')"
+        >
+          <span class="selector">►</span>
+          <div class="bg-black/30 rounded-lg overflow-hidden mb-4 relative">
+            <img
+              src="./imgs/divisao.png"
+              alt="Divisão Radical"
+              class="w-full h-40 object-cover"
+            />
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="bg-black/60 p-2 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-10 w-10 text-white lock-icon"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <h3 class="text-gray-400 mb-2">DIVISÃO RADICAL</h3>
+          <p class="text-gray-500 text-xs mb-4">
+            Divida para conquistar em aventuras matemáticas!
+          </p>
+          <div class="mt-auto">
+            <button
+              class="w-full bg-gray-600 hover:bg-gray-500 py-2 rounded pixel-button text-sm"
+              disabled
+            >
+              EM BREVE
+            </button>
+          </div>
+        </div>
+
+        <!-- Soma Espacial (Em desenvolvimento) -->
+        <div
+          class="game-item relative bg-indigo-900/40 p-4 rounded-lg cursor-pointer locked"
+          onclick="showLockedGameModal('addition')"
+        >
+          <span class="selector">►</span>
+          <div class="bg-black/30 rounded-lg overflow-hidden mb-4 relative">
+            <img
+              src="./imgs/soma.png"
+              alt="Soma Espacial"
+              class="w-full h-40 object-cover"
+            />
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="bg-black/60 p-2 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-10 w-10 text-white lock-icon"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <h3 class="text-gray-400 mb-2">SOMA ESPACIAL</h3>
+          <p class="text-gray-500 text-xs mb-4">
+            Viaje pelo espaço somando valores para salvar galáxias!
+          </p>
+          <div class="mt-auto">
+            <button
+              class="w-full bg-gray-600 hover:bg-gray-500 py-2 rounded pixel-button text-sm"
+              disabled
+            >
+              EM BREVE
+            </button>
+          </div>
+        </div>
+
+        <!-- Brain Blitz (Em desenvolvimento) -->
+        <div
+          class="game-item relative bg-indigo-900/40 p-4 rounded-lg cursor-pointer locked"
+          onclick="showLockedGameModal('brainblitz')"
+        >
+          <span class="selector">►</span>
+          <div class="bg-black/30 rounded-lg overflow-hidden mb-4 relative">
+            <img
+              src="./imgs/brainstorm.png"
+              alt="BrainStorm Battle"
+              class="w-full h-40 object-cover"
+            />
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="bg-black/60 p-2 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-10 w-10 text-white lock-icon"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <h3 class="text-gray-400 mb-2">BrainStorm Battle</h3>
+          <p class="text-gray-500 text-xs mb-4">
+            Quiz de conhecimentos gerais com desafios inteligentes!
+          </p>
+          <div class="mt-auto">
+            <button
+              class="w-full bg-gray-600 hover:bg-gray-500 py-2 rounded pixel-button text-sm"
+              disabled
+            >
+              EM BREVE
+            </button>
+          </div>
+        </div>
+
+        <!-- Subtração Ninja (Em desenvolvimento) -->
+        <div
+          class="game-item relative bg-indigo-900/40 p-4 rounded-lg cursor-pointer locked"
+          onclick="showLockedGameModal('subtraction')"
+        >
+          <span class="selector">►</span>
+          <div class="bg-black/30 rounded-lg overflow-hidden mb-4 relative">
+            <img
+              src="./imgs/subtracao.png"
+              alt="Subtração Ninja"
+              class="w-full h-40 object-cover"
+            />
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="bg-black/60 p-2 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-10 w-10 text-white lock-icon"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <h3 class="text-gray-400 mb-2">SUBTRAÇÃO NINJA</h3>
+          <p class="text-gray-500 text-xs mb-4">
+            Use a técnica ninja da subtração para derrotar inimigos!
+          </p>
+          <div class="mt-auto">
+            <button
+              class="w-full bg-gray-600 hover:bg-gray-500 py-2 rounded pixel-button text-sm"
+              disabled
+            >
+              EM BREVE
+            </button>
+          </div>
+        </div>
+
+        <!-- Frações em Ação (Em desenvolvimento) -->
+        <div
+          class="game-item relative bg-indigo-900/40 p-4 rounded-lg cursor-pointer locked"
+          onclick="showLockedGameModal('fractions')"
+        >
+          <span class="selector">►</span>
+          <div class="bg-black/30 rounded-lg overflow-hidden mb-4 relative">
+            <img
+              src="./imgs/fracoes.png"
+              alt="Frações em Ação"
+              class="w-full h-40 object-cover"
+            />
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="bg-black/60 p-2 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-10 w-10 text-white lock-icon"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <h3 class="text-gray-400 mb-2">FRAÇÕES EM AÇÃO</h3>
+          <p class="text-gray-500 text-xs mb-4">
+            Divida e conquiste com o poder das frações!
+          </p>
+          <div class="mt-auto">
+            <button
+              class="w-full bg-gray-600 hover:bg-gray-500 py-2 rounded pixel-button text-sm"
+              disabled
+            >
+              EM BREVE
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rodapé -->
+      <div class="px-4 py-6 text-center">
+        <p class="text-sm text-gray-400">© 2025 MATH ADVENTURES</p>
+
+        <div class="mt-6">
+          <a
+            href="../../index.html"
+            class="inline-block bg-indigo-800 hover:bg-indigo-700 px-4 py-2 rounded pixel-button text-sm"
+          >
+            VOLTAR AO SITE
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
 
-  
-  
-  <script src="script.js"></script>
-</body>
+    <div id="lockedGameModal" class="modal">
+      <div class="modal-content">
+        <h3 class="text-pink-400 mb-6">GAME EM DESENVOLVIMENTO!</h3>
+        <p class="text-cyan-300 mb-4">
+          Ops! Este game ainda não foi finalizado.
+        </p>
+        <p class="text-gray-300 mb-6">
+          Enquanto nossos programadores trabalham duro para liberar novos jogos,
+          que tal se divertir com os games já disponíveis?
+        </p>
+
+        <button
+          id="closeModalButton"
+          class="w-full bg-yellow-500 hover:bg-yellow-400 py-3 rounded pixel-button"
+        >
+          ENTENDI!
+        </button>
+      </div>
+    </div>
+
+    <script src="./assets/index.js"></script>
+  </body>
 </html>
